@@ -1,4 +1,4 @@
 const app = require('./config/server') ()
-app.listen(8080, function(){
+app.listen(5500, function(){
     console.log('Server connected successfully.')
 });
