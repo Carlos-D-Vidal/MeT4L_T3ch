@@ -2,7 +2,7 @@ module.exports.index = function (app,request,response)
 {
     if(request.session.id_tipo_usuario != 1 && request.session.id_tipo_usuario != 2)
     {
-        response.redirect('/usuario/login')
+        response.redirect('/usuario/cadastro_usuario')
         return
     }
     const id_tipo_usuario = request.session.id_tipo_usuario

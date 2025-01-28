@@ -5,7 +5,7 @@ const connection = function (){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'frente_caixa'
+        database: 'database'
     })
 }
 
