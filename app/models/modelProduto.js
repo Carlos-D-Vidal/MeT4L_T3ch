@@ -3,7 +3,7 @@ function produto(conexao)
     this._conexao = conexao
 }
 produto.prototype.listar = function(callback){
-    this._conexao.query("select * from produto",callback)
+    this._conexao.query("select * from item",callback)
 }
 produto.prototype.getProduto = function(idProduto){
     return new Promise((resolve,reject)=>{
