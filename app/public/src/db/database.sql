@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28/01/2025 às 18:28
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Tempo de geração: 29-Jan-2025 às 01:14
+-- Versão do servidor: 10.4.27-MariaDB
+-- versão do PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cliente`
+-- Estrutura da tabela `cliente`
 --
 
 CREATE TABLE `cliente` (
@@ -32,7 +32,7 @@ CREATE TABLE `cliente` (
   `nome_cliente` varchar(60) NOT NULL,
   `codigo` int(11) NOT NULL,
   `natureza` enum('PF','PJ') NOT NULL,
-  `cnpj_cpf` int(11) NOT NULL,
+  `cnpj_cpf` varchar(30) NOT NULL,
   `rg` int(11) NOT NULL,
   `nascimento` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_municipio` int(11) NOT NULL,
@@ -46,20 +46,16 @@ CREATE TABLE `cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Despejando dados para a tabela `cliente`
+-- Extraindo dados da tabela `cliente`
 --
 
 INSERT INTO `cliente` (`id_cliente`, `nome_cliente`, `codigo`, `natureza`, `cnpj_cpf`, `rg`, `nascimento`, `id_municipio`, `ie`, `bairro`, `numero`, `logradouro`, `email`, `pacote_promocao`, `status`) VALUES
-(1, 'Lucas', 0, 'PF', 0, 0, '2025-01-24 22:46:11', 0, 0, '', 0, '', '', 0, ''),
-(2, 'Carlos', 0, 'PF', 0, 0, '2025-01-24 22:46:11', 0, 0, '', 0, '', '', 0, ''),
-(3, 'Rafael', 0, 'PF', 0, 0, '2025-01-24 22:46:11', 0, 0, '', 0, '', '', 0, ''),
-(4, 'Nairo', 0, 'PF', 0, 0, '2025-01-24 22:46:11', 0, 0, '', 0, '', '', 0, ''),
-(5, 'Alex', 0, 'PF', 0, 0, '2025-01-24 22:46:11', 0, 0, '', 0, '', '', 0, '');
+(7, 'Nairo', 0, 'PF', '604.846.668-43', 362933881, '2025-01-29 00:13:58', 1, 0, 'Centro', 52, 'Rua Random', 'nairo@senacrs.com', 0, '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `forma_pagamento`
+-- Estrutura da tabela `forma_pagamento`
 --
 
 CREATE TABLE `forma_pagamento` (
@@ -73,7 +69,7 @@ CREATE TABLE `forma_pagamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Despejando dados para a tabela `forma_pagamento`
+-- Extraindo dados da tabela `forma_pagamento`
 --
 
 INSERT INTO `forma_pagamento` (`id_forma_pagamento`, `desc_forma_pagamento`, `id_tipo_recebimento`, `permite_parcelamento`, `qtd_max_parcelas`, `status`, `codigo`) VALUES
@@ -86,7 +82,7 @@ INSERT INTO `forma_pagamento` (`id_forma_pagamento`, `desc_forma_pagamento`, `id
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `item`
+-- Estrutura da tabela `item`
 --
 
 CREATE TABLE `item` (
@@ -102,7 +98,7 @@ CREATE TABLE `item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Despejando dados para a tabela `item`
+-- Extraindo dados da tabela `item`
 --
 
 INSERT INTO `item` (`id_item`, `desc_item`, `preco_item`, `quant_item`, `codigo`, `codigo_barra`, `id_categoria`, `registra_comissao`, `status`) VALUES
@@ -115,7 +111,7 @@ INSERT INTO `item` (`id_item`, `desc_item`, `preco_item`, `quant_item`, `codigo`
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `item_venda`
+-- Estrutura da tabela `item_venda`
 --
 
 CREATE TABLE `item_venda` (
@@ -135,7 +131,25 @@ CREATE TABLE `item_venda` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `recebimento_venda`
+-- Estrutura da tabela `municipio`
+--
+
+CREATE TABLE `municipio` (
+  `id_municipio` int(11) NOT NULL,
+  `nome_municipio` varchar(120) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Extraindo dados da tabela `municipio`
+--
+
+INSERT INTO `municipio` (`id_municipio`, `nome_municipio`) VALUES
+(1, 'Santa Cruz do Sul');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `recebimento_venda`
 --
 
 CREATE TABLE `recebimento_venda` (
@@ -147,7 +161,7 @@ CREATE TABLE `recebimento_venda` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `sys_log_registro`
+-- Estrutura da tabela `sys_log_registro`
 --
 
 CREATE TABLE `sys_log_registro` (
@@ -162,7 +176,7 @@ CREATE TABLE `sys_log_registro` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tipo_operacao`
+-- Estrutura da tabela `tipo_operacao`
 --
 
 CREATE TABLE `tipo_operacao` (
@@ -174,7 +188,7 @@ CREATE TABLE `tipo_operacao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tipo_recebimento`
+-- Estrutura da tabela `tipo_recebimento`
 --
 
 CREATE TABLE `tipo_recebimento` (
@@ -185,7 +199,26 @@ CREATE TABLE `tipo_recebimento` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuario`
+-- Estrutura da tabela `tipo_usuario`
+--
+
+CREATE TABLE `tipo_usuario` (
+  `id_tipo_usuario` int(11) NOT NULL,
+  `tipo_usuario` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Extraindo dados da tabela `tipo_usuario`
+--
+
+INSERT INTO `tipo_usuario` (`id_tipo_usuario`, `tipo_usuario`) VALUES
+(1, 'Admin'),
+(2, 'Comum');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -196,18 +229,10 @@ CREATE TABLE `usuario` (
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Despejando dados para a tabela `usuario`
---
-
-INSERT INTO `usuario` (`id_usuario`, `desc_usuario`, `login`, `id_tipo_usuario`, `status`) VALUES
-(1, 'admin', '', 0, ''),
-(2, 'comum', '', 0, '');
-
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `venda`
+-- Estrutura da tabela `venda`
 --
 
 CREATE TABLE `venda` (
@@ -228,68 +253,82 @@ CREATE TABLE `venda` (
 --
 
 --
--- Índices de tabela `cliente`
+-- Índices para tabela `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id_cliente`);
+  ADD PRIMARY KEY (`id_cliente`),
+  ADD KEY `fk_municipio` (`id_municipio`);
 
 --
--- Índices de tabela `forma_pagamento`
+-- Índices para tabela `forma_pagamento`
 --
 ALTER TABLE `forma_pagamento`
   ADD PRIMARY KEY (`id_forma_pagamento`);
 
 --
--- Índices de tabela `item`
+-- Índices para tabela `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id_item`);
 
 --
--- Índices de tabela `item_venda`
+-- Índices para tabela `item_venda`
 --
 ALTER TABLE `item_venda`
   ADD PRIMARY KEY (`id_item_venda`);
 
 --
--- Índices de tabela `recebimento_venda`
+-- Índices para tabela `municipio`
+--
+ALTER TABLE `municipio`
+  ADD PRIMARY KEY (`id_municipio`);
+
+--
+-- Índices para tabela `recebimento_venda`
 --
 ALTER TABLE `recebimento_venda`
   ADD PRIMARY KEY (`id_recebimento`);
 
 --
--- Índices de tabela `sys_log_registro`
+-- Índices para tabela `sys_log_registro`
 --
 ALTER TABLE `sys_log_registro`
   ADD PRIMARY KEY (`id_sys_log`);
 
 --
--- Índices de tabela `tipo_recebimento`
+-- Índices para tabela `tipo_recebimento`
 --
 ALTER TABLE `tipo_recebimento`
   ADD PRIMARY KEY (`id_tipo_recebimento`);
 
 --
--- Índices de tabela `usuario`
+-- Índices para tabela `tipo_usuario`
 --
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
+ALTER TABLE `tipo_usuario`
+  ADD PRIMARY KEY (`id_tipo_usuario`);
 
 --
--- Índices de tabela `venda`
+-- Índices para tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `fk_tipo_usuario` (`id_tipo_usuario`);
+
+--
+-- Índices para tabela `venda`
 --
 ALTER TABLE `venda`
   ADD PRIMARY KEY (`id_venda`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `forma_pagamento`
@@ -310,6 +349,12 @@ ALTER TABLE `item_venda`
   MODIFY `id_item_venda` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `municipio`
+--
+ALTER TABLE `municipio`
+  MODIFY `id_municipio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de tabela `recebimento_venda`
 --
 ALTER TABLE `recebimento_venda`
@@ -328,6 +373,12 @@ ALTER TABLE `tipo_recebimento`
   MODIFY `id_tipo_recebimento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `tipo_usuario`
+--
+ALTER TABLE `tipo_usuario`
+  MODIFY `id_tipo_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
@@ -338,6 +389,22 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `venda`
   MODIFY `id_venda` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `cliente`
+--
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `fk_municipio` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id_municipio`);
+
+--
+-- Limitadores para a tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `fk_tipo_usuario` FOREIGN KEY (`id_tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

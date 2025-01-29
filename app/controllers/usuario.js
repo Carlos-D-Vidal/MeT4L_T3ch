@@ -18,15 +18,8 @@ module.exports.cadastrar = function (app,request,response)
 
     request.assert('nome','Voce deve preencher o campo nome').notEmpty()
     request.assert('email','Voce deve preencher o campo email').notEmpty()
-    request.assert('senha','Voce deve preencher o campo senha').notEmpty()
-    request.assert('senha','A senha deve ter no minimo 6 caracteres').len(6)
 
     let erros = request.validationErrors() ? request.validationErrors() : []
-
-    if(dados.senha != dados.confirmar)
-    {
-        erros.push({msg: 'Senha não esta igual'})
-    }
     
     if(erros.length>0)
     {
@@ -56,8 +49,7 @@ modelUsuario.getUsuarioByEmail(dados.email, function(error,result){
 module.exports.validar = function (app,request,response)
 {
     const dados = request.body
-    request.assert('email','Você deve preencher o campo email').notEmpty()
-    request.assert('senha','Você deve preencher o campo senha').notEmpty()
+    request.assert('cnpj_cpf','Você deve preencher o campo CPF / CNPJ').notEmpty()
 
     const erros = request.validationErrors()
 
