@@ -2,7 +2,7 @@ function usuario (conexao)
 {
     this._conexao = conexao
 }
-usuario.prototype.cadastrarCliente = function (dados,callback){
+usuario.prototype.cadastrar = function (dados,callback){
     this._conexao.query(`insert into cliente values(null,'${dados.nome}',null,'${dados.natureza}','${dados.cnpj_cpf}','${dados.rj}','${dados.nascimento}',null,'${dados.ie}','${dados.bairro}','${dados.numero}','${dados.logradouro}','${dados.email}',null,1)`, dados,callback)
 }
 usuario.prototype.getUsuario = function(dados,callback)
