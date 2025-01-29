@@ -1,9 +1,9 @@
-function Pedido(conexao){
+function Venda(conexao){
     this._conexao = conexao
 }
-Pedido.prototype.existePedidoAberto = function (idUsuario) {
+Venda.prototype.existePedidoAberto = function (idUsuario) {
     return new Promise((resolve, reject) => {
-        this._conexao.query(`SELECT * FROM pedido WHERE id_usuario = ${idUsuario} AND id_status = 1;`, function(errors, result) {
+        this._conexao.query(`SELECT * FROM venda WHERE id_cliente = ${idCliente} AND status_venda = 1;`, function(errors, result) {
             if (result.length == 0) {
                 resolve(false);
             }
@@ -14,27 +14,27 @@ Pedido.prototype.existePedidoAberto = function (idUsuario) {
     })
 }
 
-Pedido.prototype.criarPedido = function (idUsuario) {
+Venda.prototype.criarPedido = function (idUsuario) {
     return new Promise((resolve, reject) => {
-        this._conexao.query(`INSERT INTO pedido VALUES(NULL, ${idUsuario}, 1, NULL);`, function(errors, result) {
+        this._conexao.query(`INSERT INTO venda VALUES(NULL, '1', current_timestamp, ${totalVenda}, ${idCliente}, NULL, ${totalItem}, NULL, NULL, ${observacao});`, function(errors, result) {
             resolve(result);
         })
     })
 }
-Pedido.prototype.getPedidoAberto = function(idUsuario){
+Venda.prototype.getPedidoAberto = function(idUsuario){
     return new Promise((resolve, reject)=>{
-        this._conexao.query(`select * from pedido where id_usuario = ${idUsuario} and id_status = 1`, function(erros, result){
+        this._conexao.query(`select * from venda where id_cliente = ${idCliente} and status = '1'`, function(erros, result){
             resolve(result)
         })
     })
 }
-Pedido.prototype.getIdPedidoAberto = function(idUsuario){
+Venda.prototype.getIdPedidoAberto = function(idUsuario){
     return new Promise((resolve, reject)=>{
-        this._conexao.query(`select id from pedido where id_usuario = ${idUsuario} and id_status = 1`, function(erros, result){
+        this._conexao.query(`select id from venda where id_cliente = ${idCliente} and status = '1'`, function(erros, result){
             resolve(result[0].id)
         })
     })
 }
 module.exports = function () {
-    return Pedido;
+    return Venda;
 }
