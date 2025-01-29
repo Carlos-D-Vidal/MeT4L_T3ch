@@ -1,5 +1,5 @@
 module.exports = function (app) {
-    app.get('/cadastro_usuario', function (request, response) {
+    app.get('/usuario/cadastro_usuario', function (request, response) {
         app.app.controllers.usuario.cadastro_usuario(app, request, response)
     })
 

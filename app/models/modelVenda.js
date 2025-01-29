@@ -30,7 +30,7 @@ Venda.prototype.getPedidoAberto = function(idUsuario){
 }
 Venda.prototype.getIdPedidoAberto = function(idUsuario){
     return new Promise((resolve, reject)=>{
-        this._conexao.query(`select id from venda where id_cliente = ${idCliente} and status = '1'`, function(erros, result){
+        this._conexao.query(`select id_venda from venda where id_cliente = ${idCliente} and status = '1'`, function(erros, result){
             resolve(result[0].id)
         })
     })
