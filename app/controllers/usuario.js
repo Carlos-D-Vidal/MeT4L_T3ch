@@ -16,8 +16,34 @@ module.exports.cadastroUsuario = function (app,request,response)
 {
     const dados = request.body
 
-    request.assert('nome','Voce deve preencher o campo nome').notEmpty()
-    request.assert('email','Voce deve preencher o campo email').notEmpty()
+    const schema = Joi.object({
+        nome: Joi.string()
+        .min(3)
+        .max(30)
+        .required()
+        .messages({
+            "string.empty": "O campo 'Nome' não pode estar vazio!",
+            "string.min": "O campo 'Nome' deve ter no mínimo {#limit} caracteres!",
+            "string.max": "O campo 'Nome' deve ter no máximo {#limit} caracteres!"
+        }),
+        email: Joi.string()
+        .min(6)
+        .email()
+        .required()
+        .messages({
+            "string.empty": "O campo 'Email' não pode estar vazio!",
+            "string.min": "O campo 'Email' deve ter no mínimo {#limit} caracteres!",
+            "string.email": "Por favor, insira um Email válido."
+        })
+    })
+    
+    const { error } = schema.validate(dados, { abortEarly: false });
+
+    if (error) {
+        console.log(error.details.map(err => err.message));
+    }
+    //request.assert('nome','Voce deve preencher o campo nome').notEmpty()
+    //request.assert('email','Voce deve preencher o campo email').notEmpty()
 
     let erros = request.validationErrors() ? request.validationErrors() : []
     

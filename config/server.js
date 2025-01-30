@@ -5,6 +5,7 @@ module.exports = function () {
     const bodyParser = require('body-parser')
     const expressValidator = require('express-validator')
     const expressSession = require('express-session')
+    const joi = require('joi')
     
 
     const app = express();
