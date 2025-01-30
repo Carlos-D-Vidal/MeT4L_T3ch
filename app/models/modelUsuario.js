@@ -3,7 +3,7 @@ function admin(conexao) {
 }
 
 admin.prototype.cadastroUsuario = function (dados, callback) {
-    this._conexao.query(`insert into usuario values(null,'${dados.nome}','${dados.email}',2,1)`)
+    this._conexao.query(`insert into usuario values(null,'${dados.nome}','${dados.email}',2,1)`,callback)
 }
 admin.prototype.editarUsuario = function(dados,id,callback)
 {
@@ -20,6 +20,9 @@ admin.prototype.editarProduto = function (dados, id, callback) {
 }
 admin.prototype.excluirProduto = function (id, callback) {
     this._conexao.query(`delete from item where id_item = ${id}`, callback)
+}
+admin.prototype.getUsuarioByEmail = function (dados, callback) {
+    this._conexao.query(`select * from usuario where email = ${dados.email}`, callback)
 }
 module.exports = function () {
     return admin

@@ -1,4 +1,4 @@
 const app = require('./config/server') ()
 app.listen(5500, function(){
-    console.log('Server connected successfully.')
+    console.log('Servidor conectado com sucesso.')
 });

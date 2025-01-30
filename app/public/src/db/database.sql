@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Jan-2025 às 01:14
+-- Tempo de geração: 30-Jan-2025 às 01:39
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -223,8 +223,8 @@ INSERT INTO `tipo_usuario` (`id_tipo_usuario`, `tipo_usuario`) VALUES
 
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
-  `desc_usuario` varchar(30) NOT NULL,
-  `login` varchar(60) NOT NULL,
+  `nome` varchar(30) NOT NULL,
+  `email` varchar(60) NOT NULL,
   `id_tipo_usuario` int(11) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -1,6 +1,6 @@
 const usuario = require("../rotas/usuario")
 
-module.exports.cadastro_usuario = function (app,request,response)
+module.exports.abre_cadastro_usuario = function (app,request,response)
 {
     const conexao = app.config.conexao
     response.render('usuario/cadastro',{erros : {}, usuario : {}})
@@ -12,7 +12,7 @@ module.exports.login = function (app,request,response)
     response.render('usuario/login',{erros : {}, usuario : {}})
 }
 
-module.exports.cadastrar = function (app,request,response)
+module.exports.cadastroUsuario = function (app,request,response)
 {
     const dados = request.body
 
