@@ -1,6 +1,5 @@
 function admin(conexao) {
     this._conexao = conexao
-    this._crypto = require('crypto')
 }
 
 admin.prototype.cadastroAdmin = function (dados, callback) {
