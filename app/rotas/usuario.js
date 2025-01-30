@@ -3,7 +3,7 @@ module.exports = function (app) {
         app.app.controllers.usuario.abre_cadastro_usuario(app, request, response)
     })
 
-    app.post('/usuario/cadastrar_usuario', function (request, response) {
+    app.post('/usuario/cadastro', function (request, response) {
         app.app.controllers.usuario.cadastroUsuario(app, request, response)
     })
 

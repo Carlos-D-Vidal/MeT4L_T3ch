@@ -1,9 +1,10 @@
-const usuario = require("../rotas/usuario")
+const dados = require("../rotas/usuario")
+const Joi = require("joi")
 
 module.exports.abre_cadastro_usuario = function (app,request,response)
 {
     const conexao = app.config.conexao
-    response.render('usuario/cadastro',{erros : {}, usuario : {}})
+    response.render('usuario/cadastro',{erros : {}, dados : {}})
 }
 
 module.exports.login = function (app,request,response)
@@ -45,17 +46,17 @@ module.exports.cadastroUsuario = function (app,request,response)
     //request.assert('nome','Voce deve preencher o campo nome').notEmpty()
     //request.assert('email','Voce deve preencher o campo email').notEmpty()
 
-    let erros = request.validationErrors() ? request.validationErrors() : []
+    //let erros = request.validationErrors() ? request.validationErrors() : []
     
-    if(erros.length>0)
-    {
-        response.render('usuario/cadastro',{erros : erros, usuario : dados})
-        return
-    }
+    //if(erros.length>0)
+    //{
+    //    response.render('usuario/cadastro',{erros : erros, usuario : dados})
+    //    return
+    //}
 
-    if(erros.length ==0){
-        erros = false
-    }
+    //if(erros.length ==0){
+    //    erros = false
+    //}
 
     const conexao = app.config.conexao
     const modelUsuario = new app.app.models.modelUsuario(conexao)
