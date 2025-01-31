@@ -1,4 +1,4 @@
-const connection = function (){
+const conexao = function (){
     const mysql = require('mysql')
 
     return mysql.createConnection({
@@ -9,4 +9,4 @@ const connection = function (){
     })
 }
 
-module.exports = connection
+module.exports = conexao

@@ -23,7 +23,7 @@ module.exports = function () {
         saveUninitialized: false
     }))
 
-    consign().include('app/rotas').then('config/connection.js').then('app/models').then('app/controllers').into(app)
+    consign().include('app/rotas').then('config/conexao.js').then('app/models').then('app/controllers').into(app)
 
     return app
 }

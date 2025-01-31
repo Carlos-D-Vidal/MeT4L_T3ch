@@ -17,7 +17,8 @@ module.exports.login = function (app,request,response)
 module.exports.cadastroUsuario = function (app,request,response)
 {
     const dados = request.body
-
+    const conexao = app.config.conexao
+    const modelUsuario = new app.app.models.modelUsuario(conexao)
     const schema = Joi.object({
         nome: Joi.string()
         .min(3)
@@ -44,6 +45,14 @@ module.exports.cadastroUsuario = function (app,request,response)
     if (error) {
         console.log(error.details.map(err => err.message));
     }
+    else
+    {
+        modelUsuario.cadastroUsuario(dados, function(error,result){
+            response.redirect('/usuario/login')
+        })
+    }
+
+}
     //request.assert('nome','Voce deve preencher o campo nome').notEmpty()
     //request.assert('email','Voce deve preencher o campo email').notEmpty()
 
@@ -58,10 +67,6 @@ module.exports.cadastroUsuario = function (app,request,response)
     //if(erros.length ==0){
     //    erros = false
     //}
-
-    const conexao = app.config.conexao
-    const modelUsuario = new app.app.models.modelUsuario(conexao)
-
 //modelUsuario.getUsuarioByEmail(dados, function(error,result){
 //    if (result.length > 0){
 //        let erros = [{msg: 'Este email já está em uso'}]
@@ -73,7 +78,7 @@ module.exports.cadastroUsuario = function (app,request,response)
 //        })
 //    }
 //})
-}
+
 module.exports.validar = function (app,request,response)
 {
     const dados = request.body
