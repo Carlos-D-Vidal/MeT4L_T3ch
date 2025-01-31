@@ -62,17 +62,17 @@ module.exports.cadastroUsuario = function (app,request,response)
     const conexao = app.config.conexao
     const modelUsuario = new app.app.models.modelUsuario(conexao)
 
-modelUsuario.getUsuarioByEmail(dados, function(error,result){
-    if (result.length > 0){
-        let erros = [{msg: 'Este email já está em uso'}]
-        response.render('usuario/cadastro',{erros : erros, usuario : dados})
-    }
-    else{
-            modelUsuario.cadastrarUsuario(dados,function (error,result){
-            response.redirect('/usuario/login')
-        })
-    }
-})
+//modelUsuario.getUsuarioByEmail(dados, function(error,result){
+//    if (result.length > 0){
+//        let erros = [{msg: 'Este email já está em uso'}]
+//        response.render('usuario/cadastro',{erros : erros, usuario : dados})
+//    }
+//    else{
+//            modelUsuario.cadastrarUsuario(dados,function (error,result){
+//            response.redirect('/usuario/login')
+//        })
+//    }
+//})
 }
 module.exports.validar = function (app,request,response)
 {

@@ -81,17 +81,17 @@ module.exports.cadastroAdmin = function (app, request, response) {
     const modelUsuario = new app.app.models.modelUsuario(conexao)
     const modelAdmin = new app.app.models.modelAdmin(conexao)
 
-    modelUsuario.getUsuarioByEmail(dados.email, function (error, result) {
-        if (result.length > 0) {
-            let erros = [{ msg: 'Este email já está em uso' }]
-            response.render('usuario/cadastro', { erros: erros, usuario: dados })
-        }
-        else {
-            modelAdmin.cadastroAdmin(dados, function (error, result) {
-                response.redirect('/admin/listar')
-            })
-        }
-    })
+    //modelUsuario.getUsuarioByEmail(dados.email, function (error, result) {
+    //    if (result.length > 0) {
+    //        let erros = [{ msg: 'Este email já está em uso' }]
+    //        response.render('usuario/cadastro', { erros: erros, usuario: dados })
+    //    }
+    //    else {
+    //        modelAdmin.cadastroAdmin(dados, function (error, result) {
+    //            response.redirect('/admin/listar')
+    //        })
+    //    }
+    //})
 }
 module.exports.abrirProduto = function (app, request, response) {
     if (request.session.id_tipo_usuario != 2) {
