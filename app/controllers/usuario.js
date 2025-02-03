@@ -82,21 +82,12 @@ module.exports.cadastroUsuario = function (app,request,response)
 module.exports.validar = function (app,request,response)
 {
     const dados = request.body
-    request.assert('cnpj_cpf','Você deve preencher o campo CPF / CNPJ').notEmpty()
-
-    const erros = request.validationErrors()
-
-    if(erros)
-    {
-        response.render('usuario/login',{erros:erros, usuario:dados})
-        return
-    }
-
+    
     const conexao = app.config.conexao
     const modelUsuario = new app.app.models.modelUsuario(conexao)
 
     modelUsuario.getUsuario(dados, function(error, result){
-        if(result.length <= 0)
+       if(result.length < 1)
         {
             let erros = [{msg:'Usuario não encontrado'}]
             response.render('usuario/login',{erros:erros, usuario:dados})
@@ -105,7 +96,7 @@ module.exports.validar = function (app,request,response)
         {
             request.session.id_tipo_usuario = result[0].id_tipo_usuario
             request.session.id_usuario = result[0].id
-            response.redirect('/')
+            response.redirect('/home')
         }
     })
 }

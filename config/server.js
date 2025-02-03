@@ -1,3 +1,5 @@
+const produto = require('../app/rotas/produto')
+
 module.exports = function () {
 
     const express = require('express')
@@ -16,6 +18,8 @@ module.exports = function () {
 
     app.use(bodyParser.urlencoded({extended: true}))
     app.use(express.static('app/public'))
+
+    app.use("/produto", produto)
 
     app.use(expressSession({
         secret:'senacrs',
