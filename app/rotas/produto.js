@@ -1,6 +1,6 @@
 module.exports = function (app)
 {
-    app.get('/usuario/listaProdutos',function(request,response){
+    app.get('/listaProdutos',function(request,response){
         app.app.controllers.produto.listar(app,request,response)
     })
     app.get('/produto/adicionar/:idProduto',function(request,response){
