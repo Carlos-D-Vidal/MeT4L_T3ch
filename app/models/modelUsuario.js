@@ -16,8 +16,6 @@ usuario.prototype.getProduto = function(id,callback){
     this._conexao.query(`select * from item where id_item = ${id}`, callback)
 }
 usuario.prototype.getUsuario = function(dados,callback){
-    
-    //this._conexao.query(`select * from usuario where nome = 'ze' and email = 'a@a.com'`, callback)
     this._conexao.query(`select * from usuario where nome = '${dados.name}' and email = '${dados.email}'`, callback)
 }
 usuario.prototype.editarProduto = function (dados, id, callback) {
@@ -26,9 +24,6 @@ usuario.prototype.editarProduto = function (dados, id, callback) {
 usuario.prototype.excluirProduto = function (id, callback) {
     this._conexao.query(`delete from item where id_item = ${id}`, callback)
 }
-//usuario.prototype.getUsuarioByEmail = function (dados, callback) {
-//    this._conexao.query(`select * from usuario where email = '${dados.email}'`, callback)
-//}
 module.exports = function () {
     return usuario
 }
