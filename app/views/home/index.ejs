@@ -23,25 +23,26 @@
             justify-content: center;
             align-items: center;
             height: 80vh;
-        }
-        table {
-            background: white;
+            flex-wrap: wrap;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-        td {
-            padding: 10px;
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-width: 600px;
         }
         button {
             background-color: #007BFF;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 20px;
             font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
             transition: 0.3s;
+            flex: 1 1 200px;
         }
         button:hover {
             background-color: #0056b3;
@@ -52,18 +53,14 @@
     <%- include('../../public/menu.html') %>
     <h1>Metaltech Games - System Controller</h1>
     <div class="container">
-        <table>
-            <tr>
-                <td><button onclick="location.href='/'">Cadastrar Venda</button></td>
-                <td><button onclick="location.href='../cliente/cadastro_cliente'">Cadastrar Cliente</button></td>
-                <td><button onclick="location.href='../usuario/cadastrar_produto'">Cadastrar Produto</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="location.href='/'">Cadastrar Promoção</button></td>
-                <td><button onclick="location.href='../admin/listar_cliente'">Editar Cliente</button></td>
-                <td><button onclick="location.href='../admin/editar_produto'">Editar Produto</button></td>
-            </tr>
-        </table>
+        <div class="button-grid">
+            <button onclick="location.href='/'">Cadastrar Venda</button>
+            <button onclick="location.href='../cliente/cadastro_cliente'">Cadastrar Cliente</button>
+            <button onclick="location.href='../usuario/cadastrar_produto'">Cadastrar Produto</button>
+            <button onclick="location.href='/'">Cadastrar Promoção</button>
+            <button onclick="location.href='../admin/listar_cliente'">Editar Cliente</button>
+            <button onclick="location.href='../admin/editar_produto'">Editar Produto</button>
+        </div>
     </div>
 </body>
 </html>
