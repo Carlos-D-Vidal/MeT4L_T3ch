@@ -51,11 +51,14 @@ module.exports.cadastroCliente = function (app,request,response)
             }),
             rg: Joi.number()
             .required()
+            .integer()
             .messages({
                 "number.empty": "O campo 'RG' não pode estar vazio!"
             }),
             nascimento: Joi.date()
             .required()
+            .iso()
+            .less('now')
             .messages({
                 "date.empty": "O campo 'Nascimento' não pode estar vazio!"
             }),
@@ -66,6 +69,8 @@ module.exports.cadastroCliente = function (app,request,response)
             }),
             numero: Joi.number()
             .required()
+            .integer()
+            .positive()
             .messages({
                 "number.empty": "O campo 'Número' não pode estar vazio!"
             }),
@@ -74,6 +79,7 @@ module.exports.cadastroCliente = function (app,request,response)
             .messages({
                 "string.empty": "O campo 'logradouro' não pode estar vazio!"
             })
+
     })
         
     const { error } = schema.validate(dados, { abortEarly: false });
