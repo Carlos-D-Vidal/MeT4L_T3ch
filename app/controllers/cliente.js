@@ -1,11 +1,17 @@
 const cliente = require("../rotas/cliente")
 const dados = require("../rotas/cliente")
 const Joi = require("joi")
-
+const modelCliente = require("../models/modelCliente")
+usuario: {}
 module.exports.abre_cadastro_cliente = function (app,request,response)
 {
     const conexao = app.config.conexao
-    response.render('cliente/cadastro_cliente',{erros : {}, dados : {}})
+
+
+    modelCliente.getMunicipios(function (error, municipio) {
+        response.render('cliente/cadastro_cliente', { municipio: municipio, dados : {}, erros: {} })
+    })
+    response.render('cliente/cadastro_cliente',{erros : {}, dados : {}, })
 }
 
 module.exports.cadastroCliente = function (app,request,response)
@@ -14,9 +20,6 @@ module.exports.cadastroCliente = function (app,request,response)
     const conexao = app.config.conexao
     const modelCliente = new app.app.models.modelCliente(conexao)
     
-    modelCliente.cadastroCliente(dados, function(error,result){
-            response.redirect('/home')
-        })
     const schema = Joi.object({
             nome: Joi.string()
             .min(3)
@@ -71,17 +74,19 @@ module.exports.cadastroCliente = function (app,request,response)
             .messages({
                 "string.empty": "O campo 'logradouro' não pode estar vazio!"
             })
-})
+    })
         
-        const { error } = schema.validate(dados, { abortEarly: false });
-    
-        if (error) {
-            console.log(error.details.map(err => err.message));
-        }
-        else
-        {
-            modelUsuario.cadastroUsuario(dados, function(error,result){
-                response.redirect('/usuario/cadastro_cliente')
-            })
-        }
+    const { error } = schema.validate(dados, { abortEarly: false });
+
+    if (error) {
+        console.log(error.details.map(err => err.message));
+        return response.json({error : error})
+        // return response.redirect("/usuario/cadastro_cliente")
+    }
+    else
+    {
+        var model = new ClienteModel(conexao)
+        model.cadastroCliente(dados)
+        response.render('/home')
+    }
 }
