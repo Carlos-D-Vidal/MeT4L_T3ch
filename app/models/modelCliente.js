@@ -3,7 +3,8 @@ function cliente (conexao)
     this._conexao = conexao
 }
 cliente.prototype.cadastroCliente = function (dados,callback){
-    this._conexao.query(`insert into cliente values(null,'${dados.nome}',0,'${dados.natureza}','${dados.cnpj_cpf}','${dados.rj}','${dados.nascimento}',1,'${dados.ie}','${dados.bairro}','${dados.numero}','${dados.logradouro}','${dados.email}',null,1)`, dados,callback)
+    console.log(dados)
+    this._conexao.query(`insert into cliente values(null,'${dados.nome}',0,'${dados.natureza}',${dados.cnpj_cpf},${dados.rg},'${dados.nascimento}','${dados.id_municipio}','${dados.ie}','${dados.bairro}','${dados.numero}','${dados.logradouro}','${dados.email}',0,1)`,callback)
 }
 cliente.prototype.getCliente = function(dados,callback)
 {

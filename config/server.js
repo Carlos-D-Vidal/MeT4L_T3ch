@@ -19,7 +19,6 @@ module.exports = function () {
     app.use(bodyParser.urlencoded({extended: true}))
     app.use(express.static('app/public'))
 
-    app.use("/produto", produto)
 
     app.use(expressSession({
         secret:'senacrs',

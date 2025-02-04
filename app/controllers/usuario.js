@@ -96,7 +96,7 @@ module.exports.validar = function (app,request,response)
         {
             request.session.id_tipo_usuario = result[0].id_tipo_usuario
             request.session.id_usuario = result[0].id
-            response.redirect('/home')
+            response.redirect('/')
         }
     })
 }
