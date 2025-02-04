@@ -3,11 +3,15 @@ function cliente (conexao)
     this._conexao = conexao
 }
 cliente.prototype.cadastroCliente = function (dados,callback){
-    this._conexao.query(`insert into cliente values(null,'${dados.nome}',null,'${dados.natureza}','${dados.cnpj_cpf}','${dados.rj}','${dados.nascimento}',1,'${dados.ie}','${dados.bairro}','${dados.numero}','${dados.logradouro}','${dados.email}',null,1)`, dados,callback)
+    this._conexao.query(`insert into cliente values(null,'${dados.nome}',0,'${dados.natureza}','${dados.cnpj_cpf}','${dados.rj}','${dados.nascimento}',1,'${dados.ie}','${dados.bairro}','${dados.numero}','${dados.logradouro}','${dados.email}',null,1)`, dados,callback)
 }
 cliente.prototype.getCliente = function(dados,callback)
 {
     this._conexao.query(`select * from cliente where cnpj_cpf = '${dados.cnpj_cpf}'`, callback)
+}
+cliente.prototype.getMunicipios = function(callback)
+{
+    this._conexao.query(`select * from municipio`, callback)
 }
 cliente.prototype.getClientes = function(callback)
 {

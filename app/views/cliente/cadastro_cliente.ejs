@@ -12,12 +12,19 @@
             if (natureza === 'PJ') {
                 inscricaoEstadualField.style.display = 'block';
             } else {
+                inscricaoEstadualField.value = null;
                 inscricaoEstadualField.style.display = 'none';
             }
         }
+
     </script>
 </head>
 <body>
+    <%= if(error){ %> 
+        <div> <%= error %>  <div>
+    <%= } %>
+
+
     <h2>Cadastro de Cliente</h2>
     <form action="/cliente/cadastrar" method="POST">
         <label for="nome">Nome:</label>
@@ -42,8 +49,13 @@
         <input type="date" value="<%= dados.nasce %>" id="data_nascimento" name="data_nascimento" required><br><br>
 
         <h3>Endereço Completo</h3>
-        <label for="cidade">Cidade:</label>
-        <input type="text" value="<%= dados.municipio %>" id="cidade" name="cidade" required><br><br>
+        <label for="municipio">Cidade:</label>
+        <select name="id_municipio">
+            <% for (let i = 0; i< id_municipio.length; i++){ %>
+                <option value="<%= municipio[i].id_municipio %>"><%= municipio[i].nome_municipio %></option>    
+            <% }  %>   
+        </select>
+
 
         <label for="estado">Estado:</label>
         <input type="text" value="<%= dados.estado %>" id="estado" name="estado" required><br><br>
