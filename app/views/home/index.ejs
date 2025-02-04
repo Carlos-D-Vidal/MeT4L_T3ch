@@ -4,22 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MGSC - Home</title>
-    <link rel="stylesheet" href="../../public/src/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        table {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        td {
+            padding: 10px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <%- include('../../public/menu.html') %>
     <h1>Metaltech Games - System Controller</h1>
-    <table border="1">
-        <tr>
-            <td><button>Cadastrar Venda</button></td>
-            <td><button>Cadastrar Cliente</button></td>
-            <td><button>Cadastrar Produto</button></td>
-        </tr>
-        <tr>
-            <td><button>Cadastrar Promoção</button></td>
-            <td><button>Editar Cliente</button></td>
-            <td><button>Editar Produto</button></td>
-        </tr>
-    </table>
+    <div class="container">
+        <table>
+            <tr>
+                <td><button>Cadastrar Venda</button></td>
+                <td><button>Cadastrar Cliente</button></td>
+                <td><button>Cadastrar Produto</button></td>
+            </tr>
+            <tr>
+                <td><button>Cadastrar Promoção</button></td>
+                <td><button>Editar Cliente</button></td>
+                <td><button>Editar Produto</button></td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

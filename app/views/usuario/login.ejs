@@ -27,9 +27,9 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
+            text-align: center;
         }
         h2 {
-            text-align: center;
             margin-bottom: 20px;
         }
         input {
@@ -47,13 +47,26 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #45a049;
         }
+        .register-btn {
+            background-color: #007BFF;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            color: white;
+            margin-top: 10px;
+        }
+        .register-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
-<body id="login">
+<body>
 
     <div class="login-container">
         <h2>Login</h2>
@@ -62,7 +75,8 @@
             <input type="text" value="<%= usuario.email %>" name="email" id="email" placeholder="Email" required>
             <button type="submit">Entrar</button>
         </form>
+        <a href="/usuario/abre_cadastro_usuario" class="register-btn">Cadastre-se</a>
     </div>
-    <a href="/usuario/abre_cadastro_usuario">Cadastre-se</a>
+
 </body>
 </html>
