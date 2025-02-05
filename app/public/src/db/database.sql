@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05-Fev-2025 às 01:10
+-- Tempo de geração: 05-Fev-2025 às 23:39
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categoria` (
   `id_categoria` int(11) NOT NULL,
-  `categoria` varchar(30) NOT NULL
+  `nome_categoria` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Extraindo dados da tabela `categoria`
 --
 
-INSERT INTO `categoria` (`id_categoria`, `categoria`) VALUES
+INSERT INTO `categoria` (`id_categoria`, `nome_categoria`) VALUES
 (1, 'Soulslike'),
 (2, 'Terror');
 
@@ -60,21 +60,9 @@ CREATE TABLE `cliente` (
   `numero` int(11) NOT NULL,
   `logradouro` varchar(120) NOT NULL,
   `email` varchar(120) NOT NULL,
-  `pacote_promocao` int(11) NOT NULL,
+  `id_promocao` int(11) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Extraindo dados da tabela `cliente`
---
-
-INSERT INTO `cliente` (`id_cliente`, `nome_cliente`, `codigo`, `natureza`, `cnpj_cpf`, `rg`, `nascimento`, `id_municipio`, `ie`, `bairro`, `numero`, `logradouro`, `email`, `pacote_promocao`, `status`) VALUES
-(7, 'Nairo', 0, 'PF', 1001000175, 362933881, '2025-01-28', 1, 0, 'Centro', 52, 'Rua Random', 'nairo@senacrs.com', 0, '1'),
-(8, 'CARLOS DANIEL VIDAL', 0, 'PF', 0, 0, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'undefined', 'carlos.vidal@sellflux.com.br', 0, '1'),
-(9, 'CARLOS DANIEL VIDAL', 0, 'PF', 0, 0, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'undefined', 'carlos.vidal@sellflux.com.br', 0, '1'),
-(10, 'CARLOS DANIEL VIDAL', 0, 'PF', 0, 0, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'undefined', 'carlos.vidal@sellflux.com.br', 0, '1'),
-(11, 'CARLOS DANIEL VIDAL', 0, 'PF', 2147483647, 2147483647, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'Beco 4 Da Rua Edwino João Haeser', 'carlos.vidal@sellflux.com.br', 0, '1'),
-(12, 'CARLOS DANIEL VIDAL', 0, 'PF', 2147483647, 2147483647, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'Beco 4 Da Rua Edwino João Haeser', 'carlos.vidal@sellflux.com.br', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -158,6 +146,18 @@ CREATE TABLE `municipio` (
 
 INSERT INTO `municipio` (`id_municipio`, `nome_municipio`) VALUES
 (1, 'Santa Cruz do Sul');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `promocao`
+--
+
+CREATE TABLE `promocao` (
+  `id_promocao` int(11) NOT NULL,
+  `nome_promocao` varchar(60) NOT NULL,
+  `desconto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -284,7 +284,8 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id_cliente`),
-  ADD KEY `fk_municipio` (`id_municipio`);
+  ADD KEY `fk_municipio` (`id_municipio`),
+  ADD KEY `fk_id_promocao` (`id_promocao`);
 
 --
 -- Índices para tabela `forma_pagamento`
@@ -310,6 +311,12 @@ ALTER TABLE `item_venda`
 --
 ALTER TABLE `municipio`
   ADD PRIMARY KEY (`id_municipio`);
+
+--
+-- Índices para tabela `promocao`
+--
+ALTER TABLE `promocao`
+  ADD PRIMARY KEY (`id_promocao`);
 
 --
 -- Índices para tabela `recebimento_venda`
@@ -362,7 +369,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `forma_pagamento`
@@ -387,6 +394,12 @@ ALTER TABLE `item_venda`
 --
 ALTER TABLE `municipio`
   MODIFY `id_municipio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `promocao`
+--
+ALTER TABLE `promocao`
+  MODIFY `id_promocao` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `recebimento_venda`
@@ -432,6 +445,7 @@ ALTER TABLE `venda`
 -- Limitadores para a tabela `cliente`
 --
 ALTER TABLE `cliente`
+  ADD CONSTRAINT `fk_id_promocao` FOREIGN KEY (`id_promocao`) REFERENCES `promocao` (`id_promocao`),
   ADD CONSTRAINT `fk_municipio` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id_municipio`);
 
 --
