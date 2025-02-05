@@ -18,11 +18,37 @@ usuario.prototype.getProduto = function(id,callback){
 usuario.prototype.getUsuario = function(dados,callback){
     this._conexao.query(`select * from usuario where nome = '${dados.name}' and email = '${dados.email}'`, callback)
 }
+usuario.prototype.getCategoria = function(callback){
+    this._conexao.query(`select * from categoria`, callback)
+}
 usuario.prototype.editarProduto = function (dados, id, callback) {
     this._conexao.query(`update item set desc_item = '${dados.descricao}', preco_item = '${dados.preco}', quant_item = '${dados.estoque}', status = '${dados.status}' where id= ${id}`, callback)
 }
 usuario.prototype.excluirProduto = function (id, callback) {
     this._conexao.query(`delete from item where id_item = ${id}`, callback)
+}
+usuario.prototype.cadastroProduto = function (dados, callback) {
+
+    codigoProduto = function(){
+        return Math.floor(1000 + Math.random() * 9000)
+    }
+    
+    codigoBarra = function(text, elementId) {
+        if (!JsBarcode) {
+            console.error("JsBarcode library is not loaded.");
+            return;
+        }
+            
+        JsBarcode("#" + elementId, text, {
+            format: "CODE128",
+            lineColor: "#000",
+            width: 2,
+            height: 50,
+            displayValue: true
+        });
+    }
+
+    this._conexao.query(`insert into produto values(null,'${dados.descricao}','${dados.preco}','${dados.quant}',${codigoProduto},'${codigoBarra}',${dados.id_categoria},${dados.comissao},'${dados.status}')`, dados, callback)
 }
 module.exports = function () {
     return usuario

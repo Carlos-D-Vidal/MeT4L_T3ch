@@ -130,27 +130,12 @@ module.exports.alterarDados = function(app,request,response)
         response.redirect('/')
     })
 }
-module.exports.abrirSenha = function(app,request,response)
+module.exports.abre_cadastro_produto = function (app,request,response)
 {
-    if(request.session.id_tipo_usuario != 1 && request.session.id_tipo_usuario != 2)
-    {
-        response.redirect('/usuario/login')
-        return
-    }
-    const idUsuario = request.session.id_usuario
     const conexao = app.config.conexao
     const modelUsuario = new app.app.models.modelUsuario(conexao)
-    modelUsuario.get(idUsuario,function(error,usuario){
-        response.render('usuario/alterarSenha',{usuario : usuario, erros:{}})
-    })
-}
-module.exports.alterarSenha = function(app,request,response)
-{
-    const dados = request.body
-    const idUsuario = request.session.id_usuario
-    const conexao = app.config.conexao
-    const modelUsuario = new app.app.models.modelUsuario(conexao)
-    modelUsuario.alterarSenha(dados,idUsuario, function(error, result){
-        response.redirect('/')
+
+    modelUsuario.getCategorias(function (error, categoria) {
+        response.render('usuario/cadastro_produto', { categoria: categoria, dados : {}, erros: {} })
     })
 }

@@ -27,8 +27,8 @@ module.exports = function (app) {
         app.app.controllers.admin.abrirProduto(app, request, response)
     })
 
-    app.post('/admin/cadastroProduto', function (request, response) {
-        app.app.controllers.admin.cadastroProduto(app, request, response)
+    app.post('/admin/abre_cadastro_produto', function (request, response) {
+        app.app.controllers.admin.abre_cadastro_produto(app, request, response)
     })
 
     app.get('/admin/listaProduto', function (request, response) {

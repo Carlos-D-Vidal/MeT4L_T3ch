@@ -37,4 +37,8 @@ module.exports = function (app) {
     app.post('/usuario/alterarSenha', function (request, response) {
         app.app.controllers.usuario.alterarSenha(app, request, response)
     })
+    app.get('/usuario/abre_cadastro_produto', function (request, response) {
+        app.app.controllers.usuario.abre_cadastro_produto(app, request, response)
+    })
+
 }   

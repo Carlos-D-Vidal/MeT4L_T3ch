@@ -67,7 +67,7 @@
     <%- include('../../public/menu.html') %>
     <div class="form-container">
         <h2>Cadastro de Produto</h2>
-        <form action="#" method="post">
+        <form action="/usuario/abre_cadastro_produto" method="post">
             <label for="descricao">Descrição</label>
             <textarea id="descricao" value="<%= dados.descricao %>" name="descricao" placeholder="Descrição do produto" rows="4" required></textarea>
 
@@ -79,7 +79,7 @@
 
             <label for="categoria">Cidade:</label>
             <select name="id_categoria">
-                <% for (let i = 0; i< municipio.length; i++){ %>
+                <% for (let i = 0; i< categoria.length; i++){ %>
                     <option value="<%= categoria[i].id_categoria %>"><%= categoria[i].nome_categoria %></option>    
                 <% }  %>   
             </select>
