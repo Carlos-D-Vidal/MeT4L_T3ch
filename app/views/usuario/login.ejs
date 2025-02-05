@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <% if (erros){ %>
-        <ul>
-            <% for (let i=0; i < erros.length; i++) { %>
-                <li><%= erros[i].msg %></li>
-            <% } %>
-        </ul>
-    <% } %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Login</title>
@@ -26,7 +19,8 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 90%;
+            max-width: 350px;
             text-align: center;
         }
         h2 {
@@ -38,6 +32,7 @@
             margin: 10px 0;
             border-radius: 4px;
             border: 1px solid #ccc;
+            box-sizing: border-box;
         }
         button {
             width: 100%;
@@ -64,19 +59,25 @@
         .register-btn:hover {
             background-color: #0056b3;
         }
+        @media (max-width: 400px) {
+            .login-container {
+                padding: 20px;
+            }
+            input, button, .register-btn {
+                padding: 12px;
+            }
+        }
     </style>
 </head>
 <body>
-
     <div class="login-container">
         <h2>Login</h2>
         <form action="/usuario/validar" method="post">
-            <input type="text" value="<%= usuario.name %>" name="name" id="name" placeholder="Nome" required>
-            <input type="text" value="<%= usuario.email %>" name="email" id="email" placeholder="Email" required>
+            <input type="text" name="name" id="name" placeholder="Nome" required>
+            <input type="email" name="email" id="email" placeholder="Email" required>
             <button type="submit">Entrar</button>
         </form>
         <a href="/usuario/abre_cadastro_usuario" class="register-btn">Cadastre-se</a>
     </div>
-
 </body>
 </html>

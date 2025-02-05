@@ -13,13 +13,16 @@
             height: 100vh;
             margin: 0;
             background-color: #f4f4f4;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .form-container {
             background-color: white;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
         }
         h2 {
             text-align: center;
@@ -31,6 +34,7 @@
             margin: 10px 0;
             border-radius: 4px;
             border: 1px solid #ccc;
+            box-sizing: border-box;
         }
         button {
             width: 100%;
@@ -43,6 +47,19 @@
         }
         button:hover {
             background-color: #45a049;
+        }
+        
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 20px;
+            }
+            input, select, textarea {
+                padding: 8px;
+                margin: 8px 0;
+            }
+            button {
+                padding: 8px;
+            }
         }
     </style>
 </head>

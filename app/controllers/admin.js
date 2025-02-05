@@ -1,3 +1,6 @@
+const JsBarcode = require('jsbarcode')
+const Joi = require('joi')
+
 module.exports.getUsuarios = function (app, request, response) {
     if (request.session.id_tipo_usuario != 2) {
         response.redirect('/usuario/login')
@@ -106,20 +109,47 @@ module.exports.cadastroProduto = function (app, request, response) {
     const conexao = app.config.conexao
     const modelAdmin = new app.app.models.modelAdmin(conexao)
 
-    request.assert('descricao', 'Voce deve preencher o campo descrição').notEmpty()
-    request.assert('preco', 'Voce deve preencher o campo preco').notEmpty()
-
-    let erros = request.validationErrors()
-    if (erros) {
-        response.render('admin/cadastroProduto', { erros: erros, produto: dados })
-        return
+    codigoProduto = function(){
+        return Math.floor(1000 + Math.random() * 9000)
     }
 
-    else {
-        modelAdmin.cadastroProduto(dados, function (error, result) {
-            response.redirect('/admin/listaProduto')
-        })
+    codigoBarra = function(text, elementId) {
+        if (!JsBarcode) {
+            console.error("JsBarcode library is not loaded.");
+            return;
+        }
+        
+        JsBarcode("#" + elementId, text, {
+            format: "CODE128",
+            lineColor: "#000",
+            width: 2,
+            height: 50,
+            displayValue: true
+        });
     }
+
+    const schema = Joi.object({
+        desc: Joi.string()
+        .required()
+        .messages({
+            "string.empty": "O campo 'Descrição' não pode estar vazio!"
+        }),
+        preco: Joi.number()
+        .required()
+        .messages({
+            "number.empty": "O campo 'Preço' não pode estar vazio!"
+        }),
+        quant: Joi.number()
+        .required()
+        .messages({
+            "number.empty": "O campo 'Quantidade' não pode estar vazio!"
+        }),
+        codigo: codigoProduto,
+        codigo_barra: codigoBarra,
+        id_categoria: null,
+        registra_comissao: null,
+        status: null
+    })
 }
 module.exports.listaProduto = function (app, request, response) {
     if (request.session.id_tipo_usuario != 2) {
