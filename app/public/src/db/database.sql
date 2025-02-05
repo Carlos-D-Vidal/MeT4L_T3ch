@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Jan-2025 às 01:39
+-- Tempo de geração: 05-Fev-2025 às 01:10
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -24,6 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id_categoria` int(11) NOT NULL,
+  `categoria` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Extraindo dados da tabela `categoria`
+--
+
+INSERT INTO `categoria` (`id_categoria`, `categoria`) VALUES
+(1, 'Soulslike'),
+(2, 'Terror');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `cliente`
 --
 
@@ -32,9 +51,9 @@ CREATE TABLE `cliente` (
   `nome_cliente` varchar(60) NOT NULL,
   `codigo` int(11) NOT NULL,
   `natureza` enum('PF','PJ') NOT NULL,
-  `cnpj_cpf` varchar(30) NOT NULL,
+  `cnpj_cpf` int(11) NOT NULL,
   `rg` int(11) NOT NULL,
-  `nascimento` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `nascimento` date NOT NULL,
   `id_municipio` int(11) NOT NULL,
   `ie` int(11) NOT NULL,
   `bairro` varchar(60) NOT NULL,
@@ -50,7 +69,12 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_cliente`, `nome_cliente`, `codigo`, `natureza`, `cnpj_cpf`, `rg`, `nascimento`, `id_municipio`, `ie`, `bairro`, `numero`, `logradouro`, `email`, `pacote_promocao`, `status`) VALUES
-(7, 'Nairo', 0, 'PF', '604.846.668-43', 362933881, '2025-01-29 00:13:58', 1, 0, 'Centro', 52, 'Rua Random', 'nairo@senacrs.com', 0, '1');
+(7, 'Nairo', 0, 'PF', 1001000175, 362933881, '2025-01-28', 1, 0, 'Centro', 52, 'Rua Random', 'nairo@senacrs.com', 0, '1'),
+(8, 'CARLOS DANIEL VIDAL', 0, 'PF', 0, 0, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'undefined', 'carlos.vidal@sellflux.com.br', 0, '1'),
+(9, 'CARLOS DANIEL VIDAL', 0, 'PF', 0, 0, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'undefined', 'carlos.vidal@sellflux.com.br', 0, '1'),
+(10, 'CARLOS DANIEL VIDAL', 0, 'PF', 0, 0, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'undefined', 'carlos.vidal@sellflux.com.br', 0, '1'),
+(11, 'CARLOS DANIEL VIDAL', 0, 'PF', 2147483647, 2147483647, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'Beco 4 Da Rua Edwino João Haeser', 'carlos.vidal@sellflux.com.br', 0, '1'),
+(12, 'CARLOS DANIEL VIDAL', 0, 'PF', 2147483647, 2147483647, '0000-00-00', 1, 0, 'Santa Vitória', 38, 'Beco 4 Da Rua Edwino João Haeser', 'carlos.vidal@sellflux.com.br', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -96,17 +120,6 @@ CREATE TABLE `item` (
   `registra_comissao` int(11) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Extraindo dados da tabela `item`
---
-
-INSERT INTO `item` (`id_item`, `desc_item`, `preco_item`, `quant_item`, `codigo`, `codigo_barra`, `id_categoria`, `registra_comissao`, `status`) VALUES
-(1, 'Elden Ring', 299.90, 10, 0, '', 0, 0, ''),
-(2, 'Dark Souls III', 120.00, 10, 0, '', 0, 0, ''),
-(3, 'Undertale', 19.90, 10, 0, '', 0, 0, ''),
-(4, 'Deltarune', 29.90, 10, 0, '', 0, 0, ''),
-(5, 'Omori', 16.90, 10, 0, '', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -229,6 +242,14 @@ CREATE TABLE `usuario` (
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `id_tipo_usuario`, `status`) VALUES
+(3, 'Carlos', 'carlos.vidal@sellflux.com.br', 2, '1'),
+(4, 'ze', 'a@a.com', 2, '1');
+
 -- --------------------------------------------------------
 
 --
@@ -253,6 +274,12 @@ CREATE TABLE `venda` (
 --
 
 --
+-- Índices para tabela `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id_categoria`);
+
+--
 -- Índices para tabela `cliente`
 --
 ALTER TABLE `cliente`
@@ -269,7 +296,8 @@ ALTER TABLE `forma_pagamento`
 -- Índices para tabela `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`id_item`);
+  ADD PRIMARY KEY (`id_item`),
+  ADD KEY `fk_id_categoria` (`id_categoria`);
 
 --
 -- Índices para tabela `item_venda`
@@ -325,10 +353,16 @@ ALTER TABLE `venda`
 --
 
 --
+-- AUTO_INCREMENT de tabela `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `forma_pagamento`
@@ -382,7 +416,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `venda`
@@ -399,6 +433,12 @@ ALTER TABLE `venda`
 --
 ALTER TABLE `cliente`
   ADD CONSTRAINT `fk_municipio` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id_municipio`);
+
+--
+-- Limitadores para a tabela `item`
+--
+ALTER TABLE `item`
+  ADD CONSTRAINT `fk_id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
 
 --
 -- Limitadores para a tabela `usuario`
