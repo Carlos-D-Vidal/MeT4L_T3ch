@@ -150,6 +150,9 @@ module.exports.cadastroProduto = function (app, request, response) {
         registra_comissao: null,
         status: null
     })
+    modelCliente.cadastroProduto(dados, function(error,result){
+        response.redirect('/')
+    })
 }
 module.exports.listaProduto = function (app, request, response) {
     if (request.session.id_tipo_usuario != 2) {
