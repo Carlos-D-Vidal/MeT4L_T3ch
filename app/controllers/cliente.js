@@ -7,8 +7,10 @@ module.exports.abre_cadastro_cliente = function (app,request,response)
     const modelCliente = new app.app.models.modelCliente(conexao)
 
     modelCliente.getMunicipios(function (error, municipio) {
-        response.render('cliente/cadastro_cliente', { municipio: municipio, dados : {}, erros: {} })
+        modelCliente.getPromocao(function(error, promocao){
+        response.render('cliente/cadastro_cliente', { municipio: municipio, promocao: promocao, dados : {}, erros: {} })
     })
+})
 }
 
 module.exports.cadastroCliente = function (app,request,response)
