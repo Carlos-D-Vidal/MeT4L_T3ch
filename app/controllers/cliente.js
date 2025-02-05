@@ -1,7 +1,6 @@
 const cliente = require("../rotas/cliente")
 const dados = require("../rotas/cliente")
 const Joi = require("joi")
-const modelCliente = require("../models/modelCliente")
 module.exports.abre_cadastro_cliente = function (app,request,response)
 {
     const conexao = app.config.conexao
@@ -77,14 +76,16 @@ module.exports.cadastroCliente = function (app,request,response)
             .messages({
                 "string.empty": "O campo 'logradouro' não pode estar vazio!"
             })
-
+            
     })
-        
-    // const { error } = schema.validate(dados, { abortEarly: false });
-    
-    
-    
-        var model = modelCliente.cadastroCliente(dados);
-        response.render('cliente/cadastro_cliente')
-    
+    //const { error } = schema.validate(dados, { abortEarly: false });
+    //if (error) {
+        //console.log(error.details.map(err => err.message));
+    //}
+    {
+        modelCliente.cadastroCliente(dados, function(error,result){
+            response.redirect('/')
+        })
+    }
+
 }
