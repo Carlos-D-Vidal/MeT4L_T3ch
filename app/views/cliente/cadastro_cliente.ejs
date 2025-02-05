@@ -89,6 +89,14 @@
         <label for="data_nascimento">Data de Nascimento:</label>
         <input type="date" value="<%= dados.nascimento %>" id="nascimento" name="nascimento" required><br><br>
 
+        <label for="promocao">Pacote promoção:</label>
+        <select name="id_promocao">
+            <% for (let i = 0; i< promocao.length; i++){ %>
+                <option value="<%= promocao[i].id_promocao %>"><%= promocao[i].nome_promocao %></option>    
+            <% }  %>   
+        </select>
+        <br><br>
+
         <h3>Endereço Completo</h3>
         <label for="municipio">Cidade:</label>
         <select name="id_municipio">
@@ -110,8 +118,8 @@
         <input type="text" value="<%= dados.numero %>" id="numero" name="numero" required><br><br>
 
         <div id="inscricao-estadual" style="display:none;">
-            <label for="inscricao_estadual">Inscrição Estadual:</label>
-            <input type="text" value="<%= dados.ie %>" id="inscricao_estadual" name="inscricao_estadual"><br><br>
+            <label for="ie">Inscrição Estadual:</label>
+            <input type="text" value="<%= dados.ie %>" id="ie" name="ie"><br><br>
         </div>
 
         <button type="submit">Cadastrar</button>
