@@ -54,31 +54,6 @@ module.exports.cadastroUsuario = function (app,request,response)
     }
 
 }
-    //request.assert('nome','Voce deve preencher o campo nome').notEmpty()
-    //request.assert('email','Voce deve preencher o campo email').notEmpty()
-
-    //let erros = request.validationErrors() ? request.validationErrors() : []
-    
-    //if(erros.length>0)
-    //{
-    //    response.render('usuario/cadastro',{erros : erros, usuario : dados})
-    //    return
-    //}
-
-    //if(erros.length ==0){
-    //    erros = false
-    //}
-//modelUsuario.getUsuarioByEmail(dados, function(error,result){
-//    if (result.length > 0){
-//        let erros = [{msg: 'Este email já está em uso'}]
-//        response.render('usuario/cadastro',{erros : erros, usuario : dados})
-//    }
-//    else{
-//            modelUsuario.cadastrarUsuario(dados,function (error,result){
-//            response.redirect('/usuario/login')
-//        })
-//    }
-//})
 
 module.exports.validar = function (app,request,response)
 {
@@ -144,9 +119,10 @@ module.exports.cadastroProduto = function (app, request, response) {
     const dados = request.body
     const conexao = app.config.conexao
     const modelUsuario = new app.app.models.modelUsuario(conexao)
+    
     {
     modelUsuario.cadastroProduto(dados, function(error,result){
-        response.redirect('/')
+        response.render('home/index')
     })
     }
 }

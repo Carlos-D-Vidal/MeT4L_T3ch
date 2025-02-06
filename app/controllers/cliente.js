@@ -18,7 +18,7 @@ module.exports.cadastroCliente = function (app,request,response)
     const dados = request.body
     const conexao = app.config.conexao
     const modelCliente = new app.app.models.modelCliente(conexao)
-    
+    /*
     const schema = Joi.object({
             nome: Joi.string()
             .min(3)
@@ -84,6 +84,7 @@ module.exports.cadastroCliente = function (app,request,response)
     //if (error) {
         //console.log(error.details.map(err => err.message));
     //}
+    */
     {
         modelCliente.cadastroCliente(dados, function(error,result){
             response.redirect('/')
