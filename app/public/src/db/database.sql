@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05-Fev-2025 às 23:39
+-- Tempo de geração: 06-Fev-2025 às 01:21
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -49,7 +49,6 @@ INSERT INTO `categoria` (`id_categoria`, `nome_categoria`) VALUES
 CREATE TABLE `cliente` (
   `id_cliente` int(11) NOT NULL,
   `nome_cliente` varchar(60) NOT NULL,
-  `codigo` int(11) NOT NULL,
   `natureza` enum('PF','PJ') NOT NULL,
   `cnpj_cpf` int(11) NOT NULL,
   `rg` int(11) NOT NULL,
@@ -63,6 +62,13 @@ CREATE TABLE `cliente` (
   `id_promocao` int(11) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`id_cliente`, `nome_cliente`, `natureza`, `cnpj_cpf`, `rg`, `nascimento`, `id_municipio`, `ie`, `bairro`, `numero`, `logradouro`, `email`, `id_promocao`, `status`) VALUES
+(15, 'Lucas', 'PJ', 100255, 1234567890, '2005-05-15', 1, 0, 'Santa Vitória', 38, 'Beco 4 Da Rua Edwino João Haeser', 'Lucas@lucas.com', 1, '1');
 
 -- --------------------------------------------------------
 
@@ -158,6 +164,14 @@ CREATE TABLE `promocao` (
   `nome_promocao` varchar(60) NOT NULL,
   `desconto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Extraindo dados da tabela `promocao`
+--
+
+INSERT INTO `promocao` (`id_promocao`, `nome_promocao`, `desconto`) VALUES
+(1, 'Nenhuma', 0),
+(2, 'Natal', 25);
 
 -- --------------------------------------------------------
 
@@ -369,7 +383,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `forma_pagamento`
@@ -399,7 +413,7 @@ ALTER TABLE `municipio`
 -- AUTO_INCREMENT de tabela `promocao`
 --
 ALTER TABLE `promocao`
-  MODIFY `id_promocao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_promocao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `recebimento_venda`
