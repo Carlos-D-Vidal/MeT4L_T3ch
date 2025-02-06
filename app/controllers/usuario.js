@@ -175,3 +175,39 @@ module.exports.cadastroProduto = function (app, request, response) {
     })
     }
 }
+module.exports.cadastroPromo = function (app,request,response)
+{
+    const dados = request.body
+    const conexao = app.config.conexao
+    const modelUsuario = new app.app.models.modelUsuario(conexao)
+    const schema = Joi.object({
+        nome: Joi.string()
+        .required()
+        .messages({
+            "string.empty": "O campo 'Nome' não pode estar vazio!"
+        }),
+        desc: Joi.string()
+        .required()
+        .messages({
+            "string.empty": "O campo 'Desconto' não pode estar vazio!"
+        })
+    })
+    
+    const { error } = schema.validate(dados, { abortEarly: false });
+
+    if (error) {
+        console.log(error.details.map(err => err.message));
+    }
+    else
+    {
+        modelUsuario.cadastroPromo(dados, function(error,result){
+            response.redirect('/')
+        })
+    }
+}
+module.exports.abre_cadastro_promo = function (app,request,response)
+{
+    const conexao = app.config.conexao
+    response.render('usuario/cadastrar_promo',{dados : {}})
+
+}

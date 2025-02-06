@@ -31,30 +31,17 @@ usuario.prototype.excluirProduto = function (id, callback) {
 }
 usuario.prototype.cadastroProduto = function (dados, codigoProduto, codigoBarra, callback) {
 
-    codigoProduto = function(){
-        return Math.floor(1000 + Math.random() * 9000)
-    }
+    codigoProduto = Math.floor(1000 + Math.random() * 9000);
 
-    codigoBarra = function(text, elementId) {
-        if (!JsBarcode) {
-            console.error("JsBarcode library is not loaded.");
-            return;
-        }
-            
-        JsBarcode("#" + elementId, text, {
-            format: "CODE128",
-            lineColor: "#000",
-            width: 2,
-            height: 50,
-            displayValue: true
-        });
-    }
+
 
     console.log(dados)
-    console.log(codigoProduto)
-    console.log(codigoBarra)
+    console.log("1"+codigoProduto)
 
     this._conexao.query(`insert into item values(null,'${dados.descricao}','${dados.preco}','${dados.quant}',${codigoProduto},'${codigoBarra}',${dados.id_categoria},${dados.comissao},'${dados.status}')`, dados, callback)
+}
+usuario.prototype.cadastroPromo = function (dados, callback) {
+    this._conexao.query(`insert into promocao values(null,'${dados.nome}',${dados.desc})`,callback)
 }
 module.exports = function () {
     return usuario
