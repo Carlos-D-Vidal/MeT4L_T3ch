@@ -96,7 +96,10 @@
             <br><br>
 
             <label for="comissao">Comissão</label>
-            <input type="number" value="<%= dados.comissao %>" id="comissao" name="comissao" placeholder="Comissão" step="0.01" required>
+            <select id="comissao"  value="<%= dados.comissao %>" name="comissao" required>
+                <option value="1" selected>Sim</option>
+                <option value="0">Não</option>
+            </select>
             <label for="status">Status</label>
             <select id="status"  value="<%= dados.status %>" name="status" required>
                 <option value="1" selected>Ativo</option>
