@@ -33,10 +33,7 @@ usuario.prototype.cadastroProduto = function (dados, codigoProduto, codigoBarra,
 
     codigoProduto = Math.floor(1000 + Math.random() * 9000);
 
-
-
-    console.log(dados)
-    console.log("1"+codigoProduto)
+    codigoBarra = Math.floor(1000000000000 + Math.random() * 9000000000000).toString();
 
     this._conexao.query(`insert into item values(null,'${dados.descricao}','${dados.preco}','${dados.quant}',${codigoProduto},'${codigoBarra}',${dados.id_categoria},${dados.comissao},'${dados.status}')`, dados, callback)
 }
