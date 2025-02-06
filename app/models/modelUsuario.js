@@ -1,4 +1,3 @@
-const JsBarcode = require('jsbarcode')
 
 function usuario(conexao) {
     this._conexao = conexao
@@ -38,7 +37,7 @@ usuario.prototype.cadastroProduto = function (dados, codigoProduto, codigoBarra,
     console.log(dados)
     console.log("1"+codigoProduto)
 
-    this._conexao.query(`insert into item values(null,'${dados.descricao}','${dados.preco}','${dados.quant}',${codigoProduto},'${codigoBarra}',${dados.id_categoria},${dados.comissao},'${dados.status}')`, dados, callback)
+    this._conexao.query(`insert into item values(null,'${dados.descricao}','${dados.preco}','${dados.quant}',${codigoProduto},'1',${dados.id_categoria},${dados.comissao},'${dados.status}')`, dados, callback)
 }
 usuario.prototype.cadastroPromo = function (dados, callback) {
     this._conexao.query(`insert into promocao values(null,'${dados.nome}',${dados.desc})`,callback)
