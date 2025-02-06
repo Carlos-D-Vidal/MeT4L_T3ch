@@ -30,15 +30,10 @@ module.exports = function (app) {
     app.post('/usuario/alterarDados', function (request, response) {
         app.app.controllers.usuario.alterarDados(app, request, response)
     })
-    app.get('/usuario/abrirSenha', function(request,response)
-    {
-        app.app.controllers.usuario.abrirSenha(app,request,response)
-    })
-    app.post('/usuario/alterarSenha', function (request, response) {
-        app.app.controllers.usuario.alterarSenha(app, request, response)
-    })
     app.get('/usuario/abre_cadastro_produto', function (request, response) {
         app.app.controllers.usuario.abre_cadastro_produto(app, request, response)
     })
-
+    app.post('/usuario/cadastro_produto', function (request, response) {
+        app.app.controllers.usuario.cadastroProduto(app, request, response)
+    })
 }   

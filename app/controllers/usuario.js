@@ -1,3 +1,4 @@
+const modelUsuario = require("../models/modelUsuario")
 const usuario = require("../rotas/usuario")
 const dados = require("../rotas/usuario")
 const Joi = require("joi")
@@ -138,4 +139,39 @@ module.exports.abre_cadastro_produto = function (app,request,response)
     modelUsuario.getCategorias(function (error, categoria) {
         response.render('usuario/cadastro_produto', { categoria: categoria, dados : {}, erros: {} })
     })
+}
+module.exports.cadastroProduto = function (app, request, response) {
+    const dados = request.body
+    const conexao = app.config.conexao
+    const modelUsuario = new app.app.models.modelUsuario(conexao)
+    /*
+    const codigoProduto = app.app.models.model
+    const schema = Joi.object({
+        desc: Joi.string()
+        .required()
+        .messages({
+            "string.empty": "O campo 'Descrição' não pode estar vazio!"
+        }),
+        preco: Joi.number()
+        .required()
+        .messages({
+            "number.empty": "O campo 'Preço' não pode estar vazio!"
+        }),
+        quant: Joi.number()
+        .required()
+        .messages({
+            "number.empty": "O campo 'Quantidade' não pode estar vazio!"
+        }),
+        codigo: codigoProduto,
+        codigo_barra: codigoBarra,
+        id_categoria: null,
+        registra_comissao: null,
+        status: null
+    })
+        */
+    {
+    modelUsuario.cadastroProduto(dados, function(error,result){
+        response.redirect('/')
+    })
+    }
 }
