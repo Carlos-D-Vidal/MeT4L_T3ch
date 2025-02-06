@@ -144,3 +144,34 @@ module.exports.excluirProduto = function(app,request,response){
         response.redirect('/admin/listaProduto')
     })
 }
+module.exports.cadastroPromo = function (app,request,response)
+{
+    const dados = request.body
+    const conexao = app.config.conexao
+    const modelUsuario = new app.app.models.modelUsuario(conexao)
+    const schema = Joi.object({
+        nome: Joi.string()
+        .required()
+        .messages({
+            "string.empty": "O campo 'Nome' não pode estar vazio!"
+        }),
+        desc: Joi.string()
+        .required()
+        .messages({
+            "string.empty": "O campo 'Email' não pode estar vazio!"
+        })
+    })
+    
+    const { error } = schema.validate(dados, { abortEarly: false });
+
+    if (error) {
+        console.log(error.details.map(err => err.message));
+    }
+    else
+    {
+        modelUsuario.cadastroUsuario(dados, function(error,result){
+            response.redirect('/')
+        })
+    }
+
+}

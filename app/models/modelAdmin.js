@@ -19,6 +19,9 @@ admin.prototype.editarProduto = function (dados, id, callback) {
 admin.prototype.excluirProduto = function (id, callback) {
     this._conexao.query(`delete from produto where id = ${id}`, callback)
 }
+admin.prototype.cadastroPromo = function (dados, callback) {
+    this._conexao.query(`insert into promocao values(null,'${dados.nome}',${dados.desc})`,callback)
+}
 module.exports = function () {
     return admin
 }
