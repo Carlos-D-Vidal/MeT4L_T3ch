@@ -7,7 +7,6 @@ module.exports = function () {
     const bodyParser = require('body-parser')
     const expressSession = require('express-session')
     const joi = require('joi')
-    const JsBarcode = require('jsbarcode');
     
 
     const app = express();
