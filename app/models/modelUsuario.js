@@ -28,13 +28,13 @@ usuario.prototype.editarProduto = function (dados, id, callback) {
 usuario.prototype.excluirProduto = function (id, callback) {
     this._conexao.query(`delete from item where id_item = ${id}`, callback)
 }
-usuario.prototype.cadastroProduto = function (dados, codigoProduto, codigoBarra, callback) {
+usuario.prototype.cadastroProduto = function (dados, callback) {
 
-    codigoProduto = Math.floor(1000 + Math.random() * 9000);
+    let codigoProduto = Math.floor(1000 + Math.random() * 9000);
 
-    codigoBarra = Math.floor(1000000000000 + Math.random() * 9000000000000).toString();
-
-    this._conexao.query(`insert into item values(null,'${dados.descricao}','${dados.preco}','${dados.quant}',${codigoProduto},'1',${dados.id_categoria},${dados.comissao},'${dados.status}')`, dados, callback)
+    let codigoBarra = Math.floor(1000000000000 + Math.random() * 9000000000000).toString();
+    
+    this._conexao.query(`insert into item values(null,'${dados.descricao}','${dados.preco}','${dados.quant}',${codigoProduto},'${codigoBarra}',${dados.id_categoria},${dados.comissao},'${dados.status}')`, dados, callback)
 }
 usuario.prototype.cadastroPromo = function (dados, callback) {
     this._conexao.query(`insert into promocao values(null,'${dados.nome}',${dados.desc})`,callback)

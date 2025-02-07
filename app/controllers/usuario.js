@@ -120,11 +120,10 @@ module.exports.cadastroProduto = function (app, request, response) {
     const conexao = app.config.conexao
     const modelUsuario = new app.app.models.modelUsuario(conexao)
     
-    {
     modelUsuario.cadastroProduto(dados, function(error,result){
-        response.render('home/index')
+        console.log(response)
+        return response.render('home/index')
     })
-    }
 }
 module.exports.cadastroPromo = function (app,request,response)
 {
