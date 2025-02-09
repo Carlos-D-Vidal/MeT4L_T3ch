@@ -39,6 +39,12 @@ usuario.prototype.cadastroProduto = function (dados, callback) {
 usuario.prototype.cadastroPromo = function (dados, callback) {
     this._conexao.query(`insert into promocao values(null,'${dados.nome}',${dados.desc})`,callback)
 }
+usuario.prototype.cadastroVenda = function (dados, callback){
+    this.conexao.query(`insert into venda values(null,'${dados.status}', current_timestamp, ${dados.total}, ${dados.idCliente}, ${dados.numeroVenda}, ${dados.total_item}, ${dados.desconto}, ${dados.acrescimo}, ${dados.observacao})`)
+}
+usuario.prototype.cadastroItemVenda = function (dados, callback){
+    this.conexao.query(`insert into venda values(null,'${dados.idItem}', ${dados.idVenda}, ${dados.quant}, ${dados.preco}, ${dados.total}, ${dados.desconto}, ${dados.acrescimo}, current_timestamp, ${dados.idUsuario}, ${dados.status})`)
+}
 module.exports = function () {
     return usuario
 }

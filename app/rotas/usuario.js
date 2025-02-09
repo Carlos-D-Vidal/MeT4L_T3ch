@@ -42,4 +42,7 @@ module.exports = function (app) {
     app.post('/usuario/cadastro_promo', function (request, response) {
         app.app.controllers.usuario.cadastroPromo(app, request, response)
     })
+    app.post('/usuario/cadastro_venda', function (request,response){
+        app.app.controllers.usuario.cadastroVenda(app, request, response)
+    })
 }   

@@ -161,3 +161,29 @@ module.exports.abre_cadastro_promo = function (app,request,response)
     response.render('usuario/cadastrar_promo',{dados : {}})
 
 }
+module.exports.abre_cadastro_venda = function (app, request, response)
+{
+    const conexao = app.config.conexao
+    response.render('usuario/cadastro_venda', {dados : {}})
+}
+module.exports.cadastroVenda = function (app, request, response){
+    const conexao = app.config.conexao
+    const modelUsuario = new app.app.models.modelUsuario(conexao)
+    modelUsuario.cadastroVenda(dados, function(error,result){
+        console.log(response)
+        return response.render('home/index')
+    })
+}
+module.exports.abre_cadastro_item_venda = function (app, request, response)
+{
+    const conexao = app.config.conexao
+    response.render('usuario/cadastro_item_venda', {dados : {}})
+}
+module.exports.cadastroItemVenda = function (app, request, response){
+    const conexao = app.config.conexao
+    const modelUsuario = new app.app.models.modelUsuario(conexao)
+    modelUsuario.cadastroItemVenda(dados, function(error,result){
+        console.log(response)
+        return response.render('usuario/cadastro_venda')
+    })
+}
