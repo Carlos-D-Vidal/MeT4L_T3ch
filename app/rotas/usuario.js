@@ -22,14 +22,6 @@ module.exports = function (app) {
     app.get('/usuario/sair', function (request, response) {
         app.app.controllers.usuario.sair(app, request, response)
     })
-   
-    app.get('/usuario/abrirAlterar', function(request,response)
-    {
-        app.app.controllers.usuario.abrirAlterar(app,request,response)
-    })
-    app.post('/usuario/alterarDados', function (request, response) {
-        app.app.controllers.usuario.alterarDados(app, request, response)
-    })
     app.get('/usuario/abre_cadastro_produto', function (request, response) {
         app.app.controllers.usuario.abre_cadastro_produto(app, request, response)
     })
@@ -43,6 +35,12 @@ module.exports = function (app) {
         app.app.controllers.usuario.cadastroPromo(app, request, response)
     })
     app.post('/usuario/cadastro_venda', function (request,response){
+        app.app.controllers.usuario.cadastroVenda(app, request, response)
+    })
+    app.get('/usuario/abre_forma', function (request, response) {
+        app.app.controllers.usuario.abreForma(app, request, response)
+    })
+    app.post('/usuario/cadastro_forma', function (request,response){
         app.app.controllers.usuario.cadastroVenda(app, request, response)
     })
 }   
