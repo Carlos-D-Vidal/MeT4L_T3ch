@@ -25,3 +25,17 @@ module.exports.cadastroCliente = function (app,request,response)
     }
 
 }
+module.exports.abre_listar_cliente = function(app, request, response){
+    const conexao = app.config.conexao
+    const modelCliente = new app.app.models.modelCliente(conexao)
+    response.render('admin/listar_cliente')
+}
+module.exports.listarCliente = function (app, request, response){
+    const conexao = app.config.conexao
+    const modelCliente = new app.app.models.modelCliente(conexao)
+    {
+        modelCliente.getClientes(function(error, result){
+            response.render('admin/listar_cliente')
+        })
+    }
+}
