@@ -163,12 +163,24 @@ module.exports.cadastroItemVenda = function (app, request, response){
         return response.render('usuario/cadastro_venda')
     })
 }
-module.exports.abre_forma = function (app,request,response)
+module.exports.abreForma = function (app,request,response)
 {
     const conexao = app.config.conexao
     const modelUsuario = new app.app.models.modelUsuario(conexao)
 
     modelUsuario.getTipoRecebi(function (error, recebimento) {
-        response.render('usuario/cadastro_forma', { recebimento: recebimento, dados : {}, erros: {} })
+        response.render('usuario/cadastrar_forma', { recebimento: recebimento, dados : {}, erros: {} })
     })
+}
+module.exports.cadastroForma = function (app,request,response)
+{
+    const dados = request.body
+    console.log(dados)
+    const conexao = app.config.conexao
+    const modelUsuario = new app.app.models.modelUsuario(conexao)
+    {
+        modelUsuario.cadastroForma(dados, function(error,result){
+            response.redirect('/')
+        })
+    }
 }

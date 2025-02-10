@@ -45,6 +45,13 @@ usuario.prototype.cadastroVenda = function (dados, callback){
 usuario.prototype.cadastroItemVenda = function (dados, callback){
     this.conexao.query(`insert into venda values(null,'${dados.idItem}', ${dados.idVenda}, ${dados.quant}, ${dados.preco}, ${dados.total}, ${dados.desconto}, ${dados.acrescimo}, current_timestamp, ${dados.idUsuario}, ${dados.status})`)
 }
+usuario.prototype.getTipoRecebi = function(callback){
+    this._conexao.query(`select * from tipo_recebimento`, callback)
+}
+usuario.prototype.cadastroForma = function (dados, callback){
+    this.conexao.query(`insert into forma_pagamento values(null,'${dados.descrForma}', '${dados.idTipo}', '${dados.parcelas}', 1)`,callback)
+    console.log(dados)
+}
 module.exports = function () {
     return usuario
 }

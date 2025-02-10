@@ -41,6 +41,6 @@ module.exports = function (app) {
         app.app.controllers.usuario.abreForma(app, request, response)
     })
     app.post('/usuario/cadastro_forma', function (request,response){
-        app.app.controllers.usuario.cadastroVenda(app, request, response)
+        app.app.controllers.usuario.cadastroForma(app, request, response)
     })
 }   
