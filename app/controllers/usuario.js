@@ -82,30 +82,6 @@ module.exports.sair = function (app,request,response)
         response.redirect('/usuario/login')
     })
 }
-module.exports.abrirAlterar = function(app,request,response)
-{
-    if(request.session.id_tipo_usuario != 1 && request.session.id_tipo_usuario != 2)
-    {
-        response.redirect('/usuario/login')
-        return
-    }
-    const idUsuario = request.session.id_usuario
-    const conexao = app.config.conexao
-    const modelUsuario = new app.app.models.modelUsuario(conexao)
-    modelUsuario.get(idUsuario,function(error,usuario){
-        response.render('usuario/alterarDados',{usuario : usuario, erros:{}})
-    })
-}
-module.exports.alterarDados = function(app,request,response)
-{
-    const dados = request.body
-    const idUsuario = request.session.id_usuario
-    const conexao = app.config.conexao
-    const modelUsuario = new app.app.models.modelUsuario(conexao)
-    modelUsuario.alterarDados(dados,idUsuario, function(error, result){
-        response.redirect('/')
-    })
-}
 module.exports.abre_cadastro_produto = function (app,request,response)
 {
     const conexao = app.config.conexao
