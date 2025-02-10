@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Pagamento</title>
+    <script>
+        function mostrarParcelas() {
+            var tipoRecebimento = document.getElementById('tipoRecebimento').value;
+            var parcelasDiv = document.getElementById('parcelasDiv');
+            if (tipoRecebimento === 'credito') {
+                parcelasDiv.style.display = 'block'; // Exibe o campo de parcelas
+            } else {
+                parcelasDiv.style.display = 'none'; // Oculta o campo de parcelas
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Formulário de Pagamento</h1>
+
+    <form action="/usuario/cadastro_forma" method="POST">
+        <label for="nomeForma">Nome da Forma:</label>
+        <input type="text" id="nomeForma" name="nomeForma" required><br><br>
+
+        <label for="id_tipo_recebimento">Tipo de Recebimento:</label>
+        <select name="">
+            <% for (let i = 0; i< recebimento.length; i++){ %>
+                <option value="<%= recebimento[i].id_tipo_recebimento %>"><%= recebimento[i].desc_tipo_recebimento %></option>    
+            <% }  %>   
+        </select>
+
+        <div id="parcelasDiv" style="display:none;">
+            <label for="parcelas">Quantidade de Parcelas:</label>
+            <select id="parcelas" name="parcelas">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select><br><br>
+        </div>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
