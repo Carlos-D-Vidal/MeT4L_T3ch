@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Pagamento</title>
+    <title>Cadastro de forma de pagamento</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            justify-content: start;
             align-items: center;
             min-height: 100vh;
             background-color: #0c0c0c;
@@ -65,6 +66,9 @@
                 padding: 15px;
             }
         }
+        h1{
+            text-align: center;
+        }
     </style>
     <script>
         function mostrarParcelas() {
@@ -79,7 +83,8 @@
     </script>
 </head>
 <body>
-    <h1>Formulário de Pagamento</h1>
+    <%- include('../../public/menu.html') %>
+    <h1>Cadastro de forma de pagamento</h1>
 
     <form action="/usuario/cadastro_forma" method="POST">
         <label for="descrForma">Nome da Forma:</label>
