@@ -29,6 +29,6 @@ module.exports.listarCliente = function(app, request, response){
     const conexao = app.config.conexao
     const modelCliente = new app.app.models.modelCliente(conexao)
     modelCliente.getClientes(function (error, result) {
-        response.render('usuario/listar_cliente', { usuario: result })
+        response.render('usuario/listar_cliente', { cliente: result })
     })
 }
