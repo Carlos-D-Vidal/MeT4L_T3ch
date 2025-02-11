@@ -102,23 +102,33 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nome</th>
                     <th>Natureza</th>
                     <th>CNPJ/CPF</th>
                     <th>RG</th>
                     <th>Nascimento</th>
-                    <th>Municipio</th>
                     <th>Inscrição Estadual</th>
                     <th>Bairro</th>
                     <th>Numero</th>
-                    <th>Endereço</th>
+                    <th>Logradouro</th>
                     <th>Email</th>
-                    <th>Promoção</th>
-                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
+                <% for (let i = 0; i < cliente.length;i ++) {%>
+                    <tr>
+                        <td><%= cliente[i].nome_cliente %></td>
+                        <td><%= cliente[i].natureza %></td>
+                        <td><%= cliente[i].cnpj_cpf %></td>
+                        <td><%= cliente[i].rg %></td>
+                        <td><%= cliente[i].nascimento %></td>
+                        <td><%= cliente[i].ie %></td>
+                        <td><%= cliente[i].bairro %></td>
+                        <td><%= cliente[i].numero %></td>
+                        <td><%= cliente[i].logradouro %></td>
+                        <td><%= cliente[i].email %></td>
+                    </tr>
+                    <% } %>
             </tbody>
         </table>
     </div>

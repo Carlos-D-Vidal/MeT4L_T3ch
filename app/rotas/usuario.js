@@ -43,4 +43,7 @@ module.exports = function (app) {
     app.post('/usuario/cadastro_forma', function (request,response){
         app.app.controllers.usuario.cadastroForma(app, request, response)
     })
+    app.get('/usuario/abre_listar_cliente', function (request, response) {
+        app.app.controllers.usuario.listarCliente(app, request, response)
+    })
 }   
