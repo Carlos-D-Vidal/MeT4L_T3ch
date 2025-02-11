@@ -175,7 +175,6 @@ module.exports.abreForma = function (app,request,response)
 module.exports.cadastroForma = function (app,request,response)
 {
     const dados = request.body
-    console.log(dados)
     const conexao = app.config.conexao
     const modelUsuario = new app.app.models.modelUsuario(conexao)
     {

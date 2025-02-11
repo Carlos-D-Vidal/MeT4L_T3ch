@@ -6,13 +6,6 @@ function usuario(conexao) {
 usuario.prototype.cadastroUsuario = function (dados, callback) {
     this._conexao.query(`insert into usuario values(null,'${dados.nome}','${dados.email}',2,1)`,callback)
 }
-usuario.prototype.editarUsuario = function(dados,id,callback)
-{
-    this._conexao.query(`update usuario set nome = '${dados.nome}',email = '${dados.email}' where id = ${id}`,callback)
-}
-usuario.prototype.cadastroProduto = function (dados, callback) {
-    this._conexao.query(`insert into item values(null,'${dados.descricao}','${dados.preco}', '${dados.estoque}', '${dados.codigo}', '${dados.codigoBarra}', '${dados.idCategoria}',1, '${dados.status})`, dados, callback)
-}
 usuario.prototype.getProduto = function(id,callback){
     this._conexao.query(`select * from item where id_item = ${id}`, callback)
 }
@@ -49,7 +42,7 @@ usuario.prototype.getTipoRecebi = function(callback){
     this._conexao.query(`select * from tipo_recebimento`, callback)
 }
 usuario.prototype.cadastroForma = function (dados, callback){
-    this.conexao.query(`insert into forma_pagamento values(null,'${dados.descrForma}', '${dados.idTipo}', '${dados.parcelas}', 1)`,callback)
+    this.conexao.query(`insert into forma_pagamento values(null,'${dados.descrForma}', '${dados.idTipo}', '${dados.parcelas}', '1')`,callback)
     console.log(dados)
 }
 module.exports = function () {

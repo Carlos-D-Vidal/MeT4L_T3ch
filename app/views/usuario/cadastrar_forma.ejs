@@ -24,7 +24,7 @@
         <input type="text" id="descrForma" name="descrForma" placeholder="Nome da forma de pagamento" required><br><br>
 
         <label for="idTipo">Tipo de Recebimento:</label>
-        <select select id="idTipo" value= "<%= dados.recebimento  %>" name="idTipo" onchange="mostrarParcelas()" required>
+        <select select id="idTipo" name="idTipo" onchange="mostrarParcelas()" required>
             <% for (let i = 0; i< recebimento.length; i++){ %>
                 <option value="<%= recebimento[i].id_tipo_recebimento %>"><%= recebimento[i].descr_tipo_recebimento %></option>    
             <% }  %>   
